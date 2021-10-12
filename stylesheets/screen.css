@@ -85,3 +85,105 @@ a:active {
   margin-bottom: 15px;
   text-align: center;
 }
+#title {
+  font-size: 30px;
+  display: block;
+}
+.preserve-access {
+  position: absolute;
+  left: -20000px;
+}
+#row {
+  display: block;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+#art {
+  display: block;
+  border: solid #000;
+  border-width: 2px;
+  float: left;
+  width: 22%;
+  margin: 1%;
+}
+h3 {
+  padding: 0.5em 0;
+}
+/* Controls */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  /* Box Styles */
+  border: 0;
+  border-radius: 3px;
+  padding: 11px;
+}
+#call-button {
+  cursor: pointer;
+  width: 143px; /* 6.5 typographic grid lines */
+  margin-top: 20px;
+  margin-right: 2.5px;
+}
+.join {
+  background-color: green;
+  color: white;
+}
+.leave {
+  background-color: rgb(187, 23, 23);
+  color: rgb(255, 255, 255);
+}
+#leave-button {
+  cursor: pointer;
+  width: 143px; /* 6.5 typographic grid lines */
+  margin-top: 20px;
+  margin-left: 2.5px;
+}
+#buttons {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+/* Clearfix (clear floats) */
+
+
+/* Video Elements */
+
+video {
+  background-color: #DDD;
+  max-width: 100%;
+}
+#videos {
+  max-width: 100%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+#self {
+  width: 50%;
+  max-width: 320px;
+  margin-bottom: 11px;
+}
+/* END:selfVideo*/
+
+/*
+@media screen and (min-width: 500px) {
+  #header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+  #header > * {
+    flex: 0 0 auto;
+  }
+  #header > h1 {
+    margin-bottom: 0;
+  }
+}
+*/

@@ -1,0 +1,87 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* stylelint-disable */
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}.lint,html{line-height:1}.lint,body{line-height:inherit}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+/* stylelint-enable */
+
+/* Begin site styles below */
+
+html {
+  font-family: "Tahoma", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  background: #dff3f5;
+}
+/* Layout */
+* {
+  box-sizing: border-box;
+}
+#interface {
+  padding: 22px;
+}
+ol {
+	list-style: upper-roman;
+}
+ul {
+	list-style: square;
+	text-justify: auto;
+	color: #fff;
+}
+.nav {
+	border-bottom: solid #314947;
+	border-width: 2px;
+	list-style: none;
+	margin: 0;
+	padding: 1em;
+	text-align: center;
+	font-family: 'Playfair Display', serif;
+	font-weight: 700;
+	min-width: 500px;
+}
+.nav ul {
+	display: inline-block;
+}
+.nav li {
+	display: inline-block;
+}
+.nav a {
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+	border: solid #2c4e4e;
+	border-width: 2.5px;
+	padding-top: 1em;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom: 1em;
+}
+.nav a:link,
+a:visited {
+	background-color: #98c2c2;
+	color: #000000;
+}
+.nav a:hover,
+a:active {
+	background-color: #cee3ff;
+	color: #2b2b2b;
+}
+#header {
+  margin-bottom: 11px;
+}
+#header > h1 {
+  margin-bottom: 11px;
+}
+#logo {
+  height: 120px;
+  width: 120px;
+}
+.wrapper {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 15px;
+  text-align: center;
+}

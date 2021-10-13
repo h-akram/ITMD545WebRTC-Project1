@@ -32,6 +32,14 @@ button.addEventListener('click', function() {
     sc.open();
 });
 
+function joinCall() {
+    sc.open();
+}
+
+function leaveCall() {
+    sc.close();
+}
+
 /* Signaling channel events */
 
 function registerScEvents() {

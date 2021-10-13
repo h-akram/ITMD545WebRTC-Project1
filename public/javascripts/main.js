@@ -6,7 +6,7 @@ const $self = {
 };
 
 const $peer = {
-    connection: new RTCPeerConnection($self.rtcConfig);
+    connection: new RTCPeerConnection($self.rtcConfig)
 };
 
 requestUserMedia($self.constraints);

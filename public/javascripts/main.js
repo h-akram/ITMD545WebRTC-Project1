@@ -20,8 +20,11 @@ async function requestUserMedia(constraints) {
 /**
  * Socket server events and callbacks
  */
-
-const sc = io();
+const button = document.querySelector('#call-button');
+const sc = io( { autoConnect: false });
+button.addEventListener('click', function() {
+    sc.open();
+});
 sc.on('connect', function() {
     console.log('Connected to socket.io instance');
 });

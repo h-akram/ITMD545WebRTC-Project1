@@ -18,8 +18,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-io.on('connection', function(socket) {
-    console.log('Heard a connection to the socket.io server')
+const namespaces = io.of(/^\/[0-9]{6}$/);
+
+namespaces.on('connection', function(socket) {
+    const namespace = socket.nsp;
+    socket.broadcast.emit('connected peer');
+    })
 });
 
 module.exports = { app, io };

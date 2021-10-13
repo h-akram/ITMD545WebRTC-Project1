@@ -16,3 +16,12 @@ async function requestUserMedia(constraints) {
     $self.stream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = $self.stream;
 }
+
+/**
+ * Socket server events and callbacks
+ */
+
+const sc = io();
+sc.on('connect', function() {
+    console.log('Connected to socket.io instance');
+});

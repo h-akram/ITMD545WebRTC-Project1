@@ -6,7 +6,7 @@
  */
 
 const { readFileSync } = require('fs');
-const app = require('../app');
+const { app, io } = require('../app');
 const debug = require('debug')('itmd545webrtc-project1:server');
 const https = require('https');
 
@@ -38,6 +38,8 @@ var server = https.createServer(config, app);
  * Listen on provided port, on all network interfaces.
  */
 
+// Attach Socket.io to HTTPS server
+server.attach(io);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

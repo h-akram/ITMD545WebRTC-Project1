@@ -39,6 +39,8 @@ const button = document.querySelector('#call-button');
 
 button.addEventListener('click', joinCall);
 
+document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
+
 
 function joinCall() {
     sc.open();

@@ -1,7 +1,12 @@
 'use strict';
 
 const $self = {
+    rtcConfig: null,
     constraints: { audio: false, video: true }
+};
+
+const $peer = {
+    connection: new RTCPeerConnection($self.rtcConfig);
 };
 
 requestUserMedia($self.constraints);

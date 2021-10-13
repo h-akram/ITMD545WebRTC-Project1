@@ -102,9 +102,39 @@ async function handleScSignal({ description, candidate }) {
     console.log('Heard a signal.');
     if (description) {
         console.log('Received SDP signal: ', description);
+
+        const readyForOffer =
+            !$self.isMakingOffer &&
+            ($peer.connection.signalingState === 'stable'
+                || $self.isSettingRemoteAnswerPending);
+
+        const offerCollision = description.type === 'offer' && !readyForOffer;
+
+        $self.isIgnoringOffer = !$self.isPolite && offerCollision;
+
+        if ($self.isIgnoringOffer) {
+            return;
+        }
+
+        $self.isSettingRemoteAnswerPending = description.type === 'answer';
+        await $peer.connection.setRemoteDescription(description);
+        $self.isSettingRemoteAnswerPending = false;
+
+        if (description.type === 'offer') {
+            await $peer.connection.setLocalDescription();
+            sc.emit('signal', { description: $peer.connection.localDescription });
+        }
     }
     else if (candidate) {
         console.log('Received ICE candidate: ', candidate);
+        try {
+            await $peer.connection.addIceCandidate(candidate);
+        }
+        catch(e) {
+            if (!self.isIgnoringOffer) {
+                console.error('Cannot add ICE candidate for peer ', e);
+            }
+        }
     }
 }
 

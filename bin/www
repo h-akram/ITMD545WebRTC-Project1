@@ -5,10 +5,10 @@
  * Module dependencies.
  */
 
-var { readFileSync } = require('fs');
-var app = require('../app');
-var debug = require('debug')('itmd545webrtc-project1:server');
-var https = require('https');
+const { readFileSync } = require('fs');
+const app = require('../app');
+const debug = require('debug')('itmd545webrtc-project1:server');
+const https = require('https');
 
 /**
  * Environment variables

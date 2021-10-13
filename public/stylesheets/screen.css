@@ -88,6 +88,12 @@ a:active {
 #title {
   font-size: 30px;
   display: block;
+  font-weight: 700;
+}
+#session-welcome {
+  display: block;
+  text-align: center;
+  padding-bottom: 10px;
 }
 .preserve-access {
   position: absolute;

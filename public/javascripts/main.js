@@ -22,24 +22,43 @@ async function requestUserMedia(constraints) {
  */
 const namespace = prepareNamespace(window.location.hash, true);
 
-/* DOM events*/
-const button = document.querySelector('#call-button');
-const sc = io( `/${namespace}`, { autoConnect: false });
+const sc = io(`/${namespace}`, { autoConnect: false });
 
 registerScEvents();
 
-button.addEventListener('click', function() {
+/* DOM events*/
+const button = document.querySelector('#call-button');
+
+/* button.addEventListener('click', function () {
     sc.open();
-});
+});*/
+
+button.addEventListener('click', joinCall);
+
 
 function joinCall() {
     sc.open();
+    registerRtcEvents($peer);
+    establishCallFeatures($peer);
 }
 
 function leaveCall() {
     sc.close();
 }
 
+/* WebRTC events */
+
+function establishCallFeatures(peer) {
+    peer.connection
+        .addTrack($self.stream.getTracks()[0],
+            $self.stream);
+}
+
+function registerRtcEvents(peer) {
+    peer.connection.onnegotiationneeded = handleRtcNegotiation;
+    peer.connection.onicecandidate = handleIceCandidate;
+    peer.connection.ontrack = handleRtcTrack;
+}
 /* Signaling channel events */
 
 function registerScEvents() {

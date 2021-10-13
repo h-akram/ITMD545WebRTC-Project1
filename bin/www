@@ -5,9 +5,16 @@
  * Module dependencies.
  */
 
+var { readFileSync } = require('fs');
 var app = require('../app');
 var debug = require('debug')('itmd545webrtc-project1:server');
-var http = require('http');
+var https = require('https');
+
+/**
+ * Environment variables
+ */
+
+const { LOCALHOST_SSL_CERT, LOCALHOST_SSL_KEY } = process.env;
 
 /**
  * Get port from environment and store in Express.
@@ -20,7 +27,12 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const config = {
+  key: readFileSync(LOCALHOST_SSL_KEY),
+  cert: readFileSync(LOCALHOST_SSL_CERT)
+};
+
+var server = https.createServer(config, app);
 
 /**
  * Listen on provided port, on all network interfaces.

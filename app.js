@@ -1,5 +1,6 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const io = require('socket.io')();
 const path = require('path');
 const logger = require('morgan');
 

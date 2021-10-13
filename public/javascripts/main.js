@@ -25,6 +25,9 @@ const namespace = window.location.hash.substr(1);
 /* DOM events*/
 const button = document.querySelector('#call-button');
 const sc = io( `/${namespace}`, { autoConnect: false });
+
+registerScEvents();
+
 button.addEventListener('click', function() {
     sc.open();
 });

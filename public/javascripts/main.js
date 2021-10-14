@@ -16,9 +16,8 @@ const $peer = {
 requestUserMedia($self.constraints);
 
 async function requestUserMedia(constraints) {
-    const video = document.querySelector('#self');
     $self.stream = await navigator.mediaDevices.getUserMedia(constraints);
-    video.srcObject = $self.stream;
+    displayStream('#self', $self.stream);
 }
 
 /**
@@ -41,17 +40,22 @@ button.addEventListener('click', handleButton);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
 
+function displayStream(selector, stream) {
+    const video = document.querySelector(selector);
+    video.srcObject = stream;
+}
+
 function handleButton(e) {
     const button = e.target;
     if (button.className === 'join') {
         button.className = 'leave';
         button.innerText = 'Leave';
-        //joinCall();
+        joinCall();
     }
     else {
         button.className = 'join';
-        button.innerText = 'Join';
-        //leaveCall();
+        button.innerText = 'Join'
+        leaveCall();
     }
 }
 
@@ -68,9 +72,7 @@ function leaveCall() {
 /* WebRTC events */
 
 function establishCallFeatures(peer) {
-    peer.connection
-        .addTrack($self.stream.getTracks()[0],
-            $self.stream);
+    peer.connection.addTrack($self.stream.getTracks()[0], $self.stream);
 }
 
 function registerRtcEvents(peer) {
@@ -91,8 +93,8 @@ function handleIceCandidate({ candidate }) {
     sc.emit('signal', { candidate: candidate });
 }
 
-function handleRtcTrack() {
-
+function handleRtcTrack({ track, streams: [stream] }) {
+    displayStream('#peer', stream);
 }
 
 /* Signaling channel events */

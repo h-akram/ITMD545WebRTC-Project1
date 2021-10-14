@@ -21,6 +21,10 @@ html {
 }
 #interface {
   padding: 22px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 ol {
 	list-style: upper-roman;
@@ -127,13 +131,11 @@ button {
   border: 0;
   border-radius: 3px;
   padding: 11px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
-#call-button {
-  cursor: pointer;
-  width: 143px; /* 6.5 typographic grid lines */
-  margin-top: 20px;
-  margin-right: 2.5px;
-}
+
 .join {
   background-color: green;
   color: white;
@@ -142,17 +144,10 @@ button {
   background-color: rgb(187, 23, 23);
   color: rgb(255, 255, 255);
 }
-#leave-button {
-  cursor: pointer;
-  width: 143px; /* 6.5 typographic grid lines */
-  margin-top: 20px;
-  margin-left: 2.5px;
-}
-#buttons {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+
+#call-button {
+  box-sizing: border-box;
+  width: 150px;
 }
 /* Clearfix (clear floats) */
 

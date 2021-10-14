@@ -160,6 +160,11 @@ async function handleScSignal({ description, candidate }) {
 
 function handleScDisconnectedPeer() {
     console.log('Heard a peer disconnect.');
+    displayStream('#peer', null);
+    $peer.connection.close();
+    $peer.connection = new RTCPeerConnection($self.rtcConfig);
+    registerRtcEvents($peer);
+    establishCallFeatures($peer);
 }
 
 /**

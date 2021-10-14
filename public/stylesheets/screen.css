@@ -11,7 +11,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 html {
   font-family: 'Playfair Display', Arial, sans-serif;
   font-size: 20px;
-  font-weight: 700;
+
   line-height: 24px;
   background: #dff3f5;
 }
@@ -43,7 +43,7 @@ ul {
 	text-align: center;
 	font-family: 'Playfair Display', serif;
 	font-weight: 700;
-	min-width: 500px;
+
 }
 .nav ul {
 	display: inline-block;
@@ -92,7 +92,7 @@ a:active {
 #title {
   font-size: 30px;
   display: block;
-  font-weight: 700;
+  font-weight: 1000;
 }
 #session-welcome {
   display: block;

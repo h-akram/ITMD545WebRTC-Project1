@@ -66,6 +66,9 @@ function joinCall() {
 }
 
 function leaveCall() {
+    $peer.connection.close();
+    $peer.connection = new RTCPeerConnection($self.rtcConfig);
+    displayStream('#peer', null);
     sc.close();
 }
 

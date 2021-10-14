@@ -37,10 +37,23 @@ const button = document.querySelector('#call-button');
     sc.open();
 });*/
 
-button.addEventListener('click', joinCall);
+button.addEventListener('click', handleButton);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
 
+function handleButton(e) {
+    const button = e.target;
+    if (button.className === 'join') {
+        button.className = 'leave';
+        button.innerText = 'Leave';
+        //joinCall();
+    }
+    else {
+        button.className = 'join';
+        button.innerText = 'Join';
+        //leaveCall();
+    }
+}
 
 function joinCall() {
     sc.open();

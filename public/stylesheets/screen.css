@@ -11,11 +11,9 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 html {
   font-family: 'Playfair Display', Arial, sans-serif;
   font-size: 20px;
-
   line-height: 24px;
   background: #dff3f5;
 }
-/* Layout */
 * {
   box-sizing: border-box;
 }
@@ -26,14 +24,8 @@ html {
   margin-right: auto;
   text-align: center;
 }
-ol {
-	list-style: upper-roman;
-}
-ul {
-	list-style: square;
-	text-justify: auto;
-	color: #fff;
-}
+
+/* nav bar */
 .nav {
 	border-bottom: solid #314947;
 	border-width: 2px;
@@ -43,7 +35,6 @@ ul {
 	text-align: center;
 	font-family: 'Playfair Display', serif;
 	font-weight: 700;
-
 }
 .nav ul {
 	display: inline-block;
@@ -72,6 +63,8 @@ a:active {
 	background-color: #cee3ff;
 	color: #2b2b2b;
 }
+
+/* rest of the page */
 #header {
   margin-bottom: 11px;
 }
@@ -121,22 +114,13 @@ a:active {
 h3 {
   padding: 0.5em 0;
 }
-#chat {
-  padding: 10px;
-  box-sizing: border-box;
-}
-#chat-log {
-  box-sizing: border-box;
-  width: 350px;
-  border: solid#2c4e4e;
-}
-/* Controls */
+
+/* buttons and controls */
 button {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
-  /* Box Styles */
   border: 0;
   border-radius: 3px;
   padding: 11px;
@@ -144,7 +128,6 @@ button {
   margin-right: auto;
   text-align: center;
 }
-
 .join-call {
   background-color: green;
   color: white;
@@ -153,12 +136,10 @@ button {
   background-color: rgb(187, 23, 23);
   color: rgb(255, 255, 255);
 }
-
 #call-button {
   box-sizing: border-box;
   width: 200px;
 }
-
 .videoOff {
   background-color: green;
   color: white;
@@ -183,11 +164,8 @@ button {
   box-sizing: border-box;
   width: 120px;
 }
-/* Clearfix (clear floats) */
 
-
-/* Video Elements */
-
+/* videos */
 video {
   background-color: #DDD;
   max-width: 100%;
@@ -205,8 +183,15 @@ video {
   margin-bottom: 11px;
 }
 
+/* chat */
+#chat {
+  padding: 10px;
+  box-sizing: border-box;
+}
 #chat-log {
-  list-style: none;
+  box-sizing: border-box;
+  width: 350px;
+  border: solid#2c4e4e;
   padding: 5px;
 }
 #chat-log .peer {
@@ -218,21 +203,3 @@ video {
 #chat-input {
   padding: 5px;
 }
-/* END:selfVideo*/
-
-/*
-@media screen and (min-width: 500px) {
-  #header {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: baseline;
-    justify-content: flex-end;
-  }
-  #header > * {
-    flex: 0 0 auto;
-  }
-  #header > h1 {
-    margin-bottom: 0;
-  }
-}
-*/

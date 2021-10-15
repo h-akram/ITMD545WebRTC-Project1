@@ -65,16 +65,23 @@ function handleButton(e) {
 
 function handleChatForm(e) {
     e.preventDefault();
-    const log = document.querySelector('#chat-log');
     const form = e.target;
     const input = form.querySelector('#chat-input');
     const message = input.value;
-    const li = document.createElement('li')
-    li.innerText = message;
-    li.className = 'self';
-    log.appendChild(li);
+
+    appendMessage('self', message);
+    $peer.chatChannel.send(message);
+
     console.log('Chat was submitted. Message:', message);
     input.value = '';
+}
+
+function appendMessage(sender, message) {
+    const log = document.querySelector('#chat-log');
+    const li = document.createElement('li');
+    li.innerText = message;
+    li.className = sender;
+    log.appendChild(li);
 }
 
 function joinCall() {
@@ -94,6 +101,10 @@ function leaveCall() {
 
 function establishCallFeatures(peer) {
     peer.connection.addTrack($self.stream.getTracks()[0], $self.stream);
+    peer.chatChannel = peer.connection.createDataChannel(`chat`, { negotiated: true, id: 50 });
+    peer.chatChannel.onmessage = function( { data }) {
+        appendMessage('peer', data);
+    }
 }
 
 function registerRtcEvents(peer) {

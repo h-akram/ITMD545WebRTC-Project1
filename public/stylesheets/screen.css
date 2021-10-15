@@ -147,7 +147,32 @@ button {
 
 #call-button {
   box-sizing: border-box;
-  width: 150px;
+  width: 200px;
+}
+
+.videoOff {
+  background-color: green;
+  color: white;
+}
+.videoOn {
+  background-color: rgb(187, 23, 23);
+  color: rgb(255, 255, 255);
+}
+.audioOff {
+  background-color: green;
+  color: white;
+}
+.audioOn {
+  background-color: rgb(187, 23, 23);
+  color: rgb(255, 255, 255);
+}
+#video-control {
+  box-sizing: border-box;
+  width: 120px;
+}
+#audio-control {
+  box-sizing: border-box;
+  width: 120px;
 }
 /* Clearfix (clear floats) */
 

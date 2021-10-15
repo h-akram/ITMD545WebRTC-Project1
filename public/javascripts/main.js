@@ -54,13 +54,13 @@ function audioStream(selector, stream) {
 
 function handleButton(e) {
     const button = e.target;
-    if (button.className === 'join') {
-        button.className = 'leave';
+    if (button.className === 'join-call') {
+        button.className = 'leave-call';
         button.innerText = 'Leave';
         joinCall();
     }
     else {
-        button.className = 'join';
+        button.className = 'join-call';
         button.innerText = 'Join'
         leaveCall();
     }

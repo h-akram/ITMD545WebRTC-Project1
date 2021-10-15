@@ -33,12 +33,16 @@ const button = document.querySelector('#call-button');
 const chatForm = document.querySelector('#chat-form');
 const videoControl = document.querySelector('#video-control');
 const audioControl = document.querySelector('#audio-control');
+const pipVideo = document.querySelector('#peer');
+const pipButton = document.querySelector('#pipButton');
 
+pipButton.hidden = !document.pictureInPictureEnabled || pipVideo.disablePictureInPicture;
 
 button.addEventListener('click', handleButton);
 chatForm.addEventListener('submit', handleChatForm);
 videoControl.addEventListener('click', stopVideo);
 audioControl.addEventListener('click', stopAudio);
+pipButton.addEventListener('click', pictureInPicture);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
 
@@ -153,6 +157,20 @@ function stopAudio(e) {
 }
 
 // attempted to use picture in picture API
+async function pictureInPicture() {
+    try {
+        if (document.pictureInPictureElement) {
+            await document.exitPictureInPicture();
+        }
+        else {
+            await video.requestPictureInPicture();
+        }
+    }
+    catch (err) {
+        console.log('Picture in Picture mode could not be entered.');
+    }
+}
+
 /* WebRTC events */
 
 function establishCallFeatures(peer) {

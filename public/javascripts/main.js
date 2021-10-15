@@ -91,12 +91,31 @@ function joinCall() {
 }
 
 function leaveCall() {
-    $peer.connection.close();
-    $peer.connection = new RTCPeerConnection($self.rtcConfig);
+    resetCall($peer);
     displayStream('#peer', null);
     sc.close();
 }
 
+function resetCall(peer) {
+    displayStream('#peer', null);
+    peer.connection.close();
+    peer.connection = new RTCPeerConnection($self.rtcConfig);
+}
+
+function resetAndRetryConnection(peer) {
+    resetCall(peer);
+
+    $self.isMakingOffer = false;
+    $self.isIgnoringOffer = false;
+    $self.isSettingRemoteAnswerPending = false;
+    $self.isSuppressingInitialOffer = $self.isPolite;
+
+    registerRtcEvents(peer);
+    establishCallFeatures(peer);
+    if ($self.isPolite) {
+        sc.emit('signal', { description: {type: '_reset'}});
+    }
+}
 /* WebRTC events */
 
 function establishCallFeatures(peer) {
@@ -115,10 +134,20 @@ function registerRtcEvents(peer) {
 }
 
 async function handleRtcNegotiation() {
-    console.log('RTC negotiation needed . . .');
+    if ($self.isSuppressingInitialOffer) return;
+    console.log('RTC negotiation needed...');
     $self.isMakingOffer = true;
-    await $peer.connection.setLocalDescription();
-    sc.emit('signal', { description: $peer.connection.localDescription });
+    try {
+        await $peer.connection.setLocalDescription();
+    }
+    catch (e) {
+        const offer = await $peer.connection.createOffer();
+        await $peer.connection.setLocalDescription(offer);
+    }
+    finally {
+        //console.log('Send description...');
+        sc.emit('signal', { description: $peer.connection.localDescription });
+    }
     $self.isMakingOffer = false;
 }
 
@@ -159,6 +188,11 @@ async function handleScSignal({ description, candidate }) {
     if (description) {
         console.log('Received SDP signal: ', description);
 
+        if (description.type === '_reset') {
+            resetAndRetryConnection($peer);
+            return;
+        }
+
         const readyForOffer =
             !$self.isMakingOffer &&
             ($peer.connection.signalingState === 'stable'
@@ -173,16 +207,32 @@ async function handleScSignal({ description, candidate }) {
         }
 
         $self.isSettingRemoteAnswerPending = description.type === 'answer';
-        await $peer.connection.setRemoteDescription(description);
-        $self.isSettingRemoteAnswerPending = false;
+        console.log('Signaling state on incoming description; ', $peer.connection.signalingState);
+        try{
+            await $peer.connection.setRemoteDescription(description);
+        }
+        catch(e){
+            //$self.isSettingRemoteAnswerPending = false;
+            resetAndRetryConnection($peer);
+            return;
+        }
 
         if (description.type === 'offer') {
-            await $peer.connection.setLocalDescription();
-            sc.emit('signal', { description: $peer.connection.localDescription });
+            try { 
+                await $peer.connection.setLocalDescription();
+            }
+            catch (e) {
+                const answer = await $peer.connection.createAnswer();
+                await $peer.connection.setLocalDescription(answer);
+            }
+            finally {
+                sc.emit('signal', { description: $peer.connection.localDescription });
+                $self.isSuppressingInitialOffer = false;
+            }
         }
     }
     else if (candidate) {
-        console.log('Received ICE candidate: ', candidate);
+        console.log('Received ICE candidate:', candidate);
         try {
             await $peer.connection.addIceCandidate(candidate);
         }
@@ -196,9 +246,7 @@ async function handleScSignal({ description, candidate }) {
 
 function handleScDisconnectedPeer() {
     console.log('Heard a peer disconnect.');
-    displayStream('#peer', null);
-    $peer.connection.close();
-    $peer.connection = new RTCPeerConnection($self.rtcConfig);
+    resetCall($peer);
     registerRtcEvents($peer);
     establishCallFeatures($peer);
 }

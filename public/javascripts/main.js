@@ -14,7 +14,6 @@ const $peer = {
 };
 
 requestUserMedia($self.constraints);
-//requestUserAudio($self.constraints);
 
 async function requestUserMedia(constraints) {
     $self.stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -36,9 +35,6 @@ const button = document.querySelector('#call-button');
 
 const chatForm = document.querySelector('#chat-form');
 
-/* button.addEventListener('click', function () {
-    sc.open();
-});*/
 
 button.addEventListener('click', handleButton);
 
@@ -147,7 +143,6 @@ async function handleRtcNegotiation() {
         await $peer.connection.setLocalDescription(offer);
     }
     finally {
-        //console.log('Send description...');
         sc.emit('signal', { description: $peer.connection.localDescription });
     }
     $self.isMakingOffer = false;

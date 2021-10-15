@@ -2,7 +2,7 @@
 
 const $self = {
     rtcConfig: null,
-    constraints: { audio: false, video: true },
+    constraints: { audio: true, video: true },
     isPolite: false,
     isMakingOffer: false,
     isIgnoringOffer: false,
@@ -14,10 +14,12 @@ const $peer = {
 };
 
 requestUserMedia($self.constraints);
+//requestUserAudio($self.constraints);
 
 async function requestUserMedia(constraints) {
     $self.stream = await navigator.mediaDevices.getUserMedia(constraints);
     displayStream('#self', $self.stream);
+    audioStream('#self', $self.stream);
 }
 
 /**

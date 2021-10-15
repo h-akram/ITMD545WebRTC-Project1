@@ -120,6 +120,7 @@ function resetAndRetryConnection(peer) {
     }
 }
 
+// starting and stopping video
 function stopVideo(e) {
     const videoStream = $self.stream.getVideoTracks()[0];
     const videoControl = e.target;
@@ -135,6 +136,7 @@ function stopVideo(e) {
     }
 }
 
+//starting and stopping audio
 function stopAudio(e) {
     const audioStream = $self.stream.getAudioTracks()[0];
     const audioControl = e.target;
@@ -150,6 +152,7 @@ function stopAudio(e) {
     }
 }
 
+// attempted to use picture in picture API
 /* WebRTC events */
 
 function establishCallFeatures(peer) {

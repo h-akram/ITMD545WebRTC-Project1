@@ -32,11 +32,15 @@ registerScEvents();
 /* DOM events*/
 const button = document.querySelector('#call-button');
 
+const chatForm = document.querySelector('#chat-form');
+
 /* button.addEventListener('click', function () {
     sc.open();
 });*/
 
 button.addEventListener('click', handleButton);
+
+chatForm.addEventListener('submit', handleChatForm);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
 
@@ -57,6 +61,20 @@ function handleButton(e) {
         button.innerText = 'Join'
         leaveCall();
     }
+}
+
+function handleChatForm(e) {
+    e.preventDefault();
+    const log = document.querySelector('#chat-log');
+    const form = e.target;
+    const input = form.querySelector('#chat-input');
+    const message = input.value;
+    const li = document.createElement('li')
+    li.innerText = message;
+    li.className = 'self';
+    log.appendChild(li);
+    console.log('Chat was submitted. Message:', message);
+    input.value = '';
 }
 
 function joinCall() {

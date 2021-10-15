@@ -31,16 +31,25 @@ registerScEvents();
 /* DOM events*/
 const button = document.querySelector('#call-button');
 const chatForm = document.querySelector('#chat-form');
+const videoControl = document.querySelector('#video-control');
+const audioControl = document.querySelector('#audio-control');
 
 
 button.addEventListener('click', handleButton);
 chatForm.addEventListener('submit', handleChatForm);
+videoControl.addEventListener('click', stopVideo);
+audioControl.addEventListener('click', stopAudio);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
 
 function displayStream(selector, stream) {
     const video = document.querySelector(selector);
     video.srcObject = stream;
+}
+
+function audioStream(selector, stream) {
+    const audio = document.querySelector(selector);
+    audio.srcObject = stream;
 }
 
 function handleButton(e) {
@@ -110,6 +119,37 @@ function resetAndRetryConnection(peer) {
         sc.emit('signal', { description: {type: '_reset'}});
     }
 }
+
+function stopVideo(e) {
+    const videoStream = $self.stream.getVideoTracks()[0];
+    const videoControl = e.target;
+    if (videoControl.className === 'videoOn') {
+        videoControl.className = 'videoOff';
+        videoControl.innerText = 'Start Video';
+        videoStream.enabled = false;
+    }
+    else {
+        videoControl.className = 'videoOn';
+        videoControl.innerText = 'Stop Video';
+        videoStream.enabled = true;
+    }
+}
+
+function stopAudio(e) {
+    const audioStream = $self.stream.getAudioTracks()[0];
+    const audioControl = e.target;
+    if (audioControl.className === 'audioOn') {
+        audioControl.className = 'audioOff';
+        audioControl.innerText = 'Start Audio';
+        audioStream.enabled = false;
+    }
+    else {
+        audioControl.className = 'audioOn';
+        audioControl.innerText = 'Stop Audio';
+        audioStream.enabled = true;
+    }
+}
+
 /* WebRTC events */
 
 function establishCallFeatures(peer) {

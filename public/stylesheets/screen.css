@@ -99,7 +99,7 @@ a:active {
   text-align: center;
   padding-bottom: 10px;
 }
-.preserve-access {
+.accessibility {
   position: absolute;
   left: -20000px;
 }
@@ -121,6 +121,15 @@ a:active {
 h3 {
   padding: 0.5em 0;
 }
+#chat {
+  padding: 10px;
+  box-sizing: border-box;
+}
+#chat-log {
+  box-sizing: border-box;
+  width: 350px;
+  border: solid#2c4e4e;
+}
 /* Controls */
 button {
   font-family: inherit;
@@ -136,11 +145,11 @@ button {
   text-align: center;
 }
 
-.join {
+.join-call {
   background-color: green;
   color: white;
 }
-.leave {
+.leave-call {
   background-color: rgb(187, 23, 23);
   color: rgb(255, 255, 255);
 }
@@ -198,12 +207,16 @@ video {
 
 #chat-log {
   list-style: none;
+  padding: 5px;
 }
 #chat-log .peer {
   background:#DDD;
 }
 #chat-log .self {
   background: #98c2c2;
+}
+#chat-input {
+  padding: 5px;
 }
 /* END:selfVideo*/
 

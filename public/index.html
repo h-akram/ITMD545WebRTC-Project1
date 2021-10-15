@@ -38,22 +38,22 @@
             poster="images/placeholder.png">
             </video>
         </article>
-            <button type="button" class="join" id="call-button">Join</button>
+            <button type="button" class="join-call" id="call-button">Join</button>
             <button type="button" class="videoOn" id="video-control">Stop Video</button>
             <button type="button" class="audioOn" id="audio-control">Stop Audio</button>
-
-        <article id="chat">
-          <h3 class="preserve-access">Chatbox</h3>
-          <ol id="chat-log">
-          </ol>
-          <form id="chat-form" action="#null" method="get">
-            <label class="preserve-access" for="chat-input">Your Message</label>
-            <input id="chat-input" type="text" autocomplete=""off"/>
-            <label class="preserve-access" for="chat-input">Send Message</label>
-            <button id="chat-button" type="submit">Send</button>
-          </form>
-        </article>
+            <button id="pipButton" class="hidden" disabled>Enter PiP</button>
     </main>
+    <aside id="chat">
+      <h3 class="accessibility">Chatbox</h3>
+      <ol id="chat-log">
+      </ol>
+      <form id="chat-form" action="#null" method="get">
+        <label class="accessibility" for="chat-input">Your Message</label>
+        <input id="chat-input" type="text" autocomplete="" off" />
+        <label class="accessibility" for="chat-input">Send Message</label>
+        <button id="chat-button" type="submit">Send</button>
+      </form>
+    </aside>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://webrtchacks.github.io/adapter/adapter-latest.js"></script>

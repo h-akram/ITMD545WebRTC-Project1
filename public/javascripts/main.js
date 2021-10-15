@@ -20,24 +20,20 @@ async function requestUserMedia(constraints) {
     displayStream('#self', $self.stream);
     audioStream('#self', $self.stream);
 }
-
 /**
  * Socket server events and callbacks
  */
 const namespace = prepareNamespace(window.location.hash, true);
-
 const sc = io(`/${namespace}`, { autoConnect: false });
 
 registerScEvents();
 
 /* DOM events*/
 const button = document.querySelector('#call-button');
-
 const chatForm = document.querySelector('#chat-form');
 
 
 button.addEventListener('click', handleButton);
-
 chatForm.addEventListener('submit', handleChatForm);
 
 document.querySelector('#session-welcome').innerText = `Welcome to Session #${namespace}!`;
